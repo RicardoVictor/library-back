@@ -3,13 +3,13 @@
     public class Gender
     {
         public Guid Id { get; private set; }
-        public string Name { get; private set; }
+        public string Name { get; set; }
 
-        public virtual ICollection<Book> Books { get; private set; }
+        public virtual ICollection<Book> Books { get; set; }
 
-        public Gender(Guid id, string name)
+        public Gender(string name)
         {
-            Id = id;
+            Id = Guid.NewGuid();
             Name = name;
         }
     }

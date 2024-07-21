@@ -11,15 +11,11 @@
 
         public Book(string name, Guid genderId, Guid authorId)
         {
-            SetGuid();
+            Id = Guid.NewGuid();
             Name = name;
             GenderId = genderId;
             AuthorId = authorId;
         }
 
-        public void SetGuid()
-        {
-            Id = Guid.NewGuid();
-        }
     }
 }
