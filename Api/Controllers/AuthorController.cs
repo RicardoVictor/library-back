@@ -35,7 +35,7 @@ namespace Library.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> PostAsync([FromQuery] AuthorPostRequest model)
+        public async Task<IActionResult> PostAsync([FromBody] AuthorPostRequest model)
             => Result(await _service.PostAsync(model));
 
         [HttpPut("{id}")]

@@ -36,7 +36,7 @@ public class AuthorService : BaseService, IAuthorService
             var authors = await _repository.GetPagedAsync(filter);
 
             result = new PagedList<AuthorResponse>(
-                authors.PageNumber,
+                authors.Items.Any() ? authors.PageNumber : 0,
                 authors.PageSize,
                 authors.TotalItems,
                 authors.TotalPages,

@@ -36,7 +36,7 @@ public class GenderService : BaseService, IGenderService
             var genders = await _repository.GetPagedAsync(filter);
 
             result = new PagedList<GenderResponse>(
-                genders.PageNumber,
+                genders.Items.Any() ? genders.PageNumber : 0,
                 genders.PageSize,
                 genders.TotalItems,
                 genders.TotalPages,

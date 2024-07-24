@@ -21,12 +21,10 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAllOrigins", builder =>
-    {
-        builder.AllowAnyOrigin();
-        builder.AllowAnyHeader();
-        builder.AllowAnyMethod();
-    });
+    options.AddPolicy("AllowAll",
+        builder => builder.AllowAnyOrigin()
+                          .AllowAnyMethod()
+                          .AllowAnyHeader());
 });
 
 builder.Services.AddExceptionHandler(options =>
@@ -49,7 +47,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseMiddleware<ExceptionHandlerMiddleware>();
 
-app.UseCors("AllowAllOrigins");
+app.UseCors("AllowAll");
 
 app.UseHttpsRedirection();
 

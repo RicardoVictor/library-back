@@ -44,7 +44,7 @@ public class BookService : BaseService, IBookService
             var books = await _repository.GetPagedAsync(filter);
 
             result = new PagedList<BookResponse>(
-                books.PageNumber,
+                books.Items.Any() ? books.PageNumber : 0,
                 books.PageSize,
                 books.TotalItems,
                 books.TotalPages,
@@ -82,7 +82,7 @@ public class BookService : BaseService, IBookService
         var (gender, errorGender) = await _genderValidationService.ValidateExistsAsync(request.GenderId);
         if (gender is null) return SetErrorResponse<Guid>(HttpStatusCode.BadRequest, errorGender);
 
-        if (await _repository.ExistsAsync(x => x.Name == request.Name)) return SetErrorResponse<Guid>(HttpStatusCode.BadRequest, $"Usuário com nome '{request.Name}' já cadastrado no sistema.");
+        if (await _repository.ExistsAsync(x => x.Name == request.Name)) return SetErrorResponse<Guid>(HttpStatusCode.BadRequest, $"Livro com nome '{request.Name}' já cadastrado no sistema.");
 
         var book = new Book(
             request.Name!,
