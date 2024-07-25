@@ -70,14 +70,14 @@ namespace Library.Data.Repositories.Base
         {
             return _context.Set<TEntity>()
                 .Where(where)
-                .OrderByDescending(order)
+                .OrderBy(order)
                 .ToPagedListAsync(pageNumber, pageSize);
         }
 
         public Task<IPagedList<TEntity>> GetAsync<TKey>(Expression<Func<TEntity, TKey>> order, int pageNumber, int pageSize)
         {
             return _context.Set<TEntity>()
-               .OrderByDescending(order)
+               .OrderBy(order)
                .ToPagedListAsync(pageNumber, pageSize);
         }
 

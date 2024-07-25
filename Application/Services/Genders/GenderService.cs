@@ -70,6 +70,8 @@ public class GenderService : BaseService, IGenderService
     {
         var gender = new Gender(request.Name!);
 
+        if (await _repository.ExistsAsync(x => x.Name == request.Name)) return SetErrorResponse<Guid>(HttpStatusCode.BadRequest, $"Gênero com nome '{request.Name}' já cadastrado no sistema.");
+
         await _repository.AddAsync(gender);
 
         await _unitOfWork.CommitAsync();

@@ -70,6 +70,8 @@ public class AuthorService : BaseService, IAuthorService
     {
         var author = new Author(request.Name!);
 
+        if (await _repository.ExistsAsync(x => x.Name == request.Name)) return SetErrorResponse<Guid>(HttpStatusCode.BadRequest, $"Autor com nome '{request.Name}' já cadastrado no sistema.");
+
         await _repository.AddAsync(author);
 
         await _unitOfWork.CommitAsync();

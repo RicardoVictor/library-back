@@ -16,12 +16,12 @@ namespace Library.Data.Configurations
             builder.HasOne(x => x.Gender)
                 .WithMany(x => x.Books)
                 .HasForeignKey(x => x.GenderId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(x => x.Author)
                 .WithMany(x => x.Books)
                 .HasForeignKey(x => x.AuthorId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
         }
     }
