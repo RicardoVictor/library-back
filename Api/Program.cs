@@ -1,3 +1,4 @@
+using System.Reflection;
 using Library.Api;
 using Library.Api.Middlewares;
 using Library.Infra.IoC;
@@ -17,7 +18,12 @@ builder.Services.AddRepositories();
 builder.Services.AddServices();
 builder.Services.AddControllers();
 builder.Services.AddHealthChecks();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
+});
 
 builder.Services.AddCors(options =>
 {
